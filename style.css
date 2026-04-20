@@ -69,8 +69,8 @@ a {
     border: 2px solid var(--borderColor);
     overflow: hidden;
     position: relative;
+    box-sizing: border-box;
     transition: all 1500ms linear;
-
 }
 
 .pod::after {
@@ -84,8 +84,47 @@ a {
     right: -50%;
 }
 
+@keyframes toJoining {
+    to {
+        --accentLG: rgba(0, 0, 0, 0);
+        --mainLG:  rgba(255, 110, 151, 0.25);
+        --secondaryLG: rgb(255, 255, 255, 0.8);
+
+        --mainCG:rgba(251, 251, 251, 1);
+        --secondaryCG:  rgba(152, 141, 141, 1);
+
+        --mainRG: rgba(0, 0, 0, 0.1); 
+        --secondaryRG: rgba(255, 255, 255, 0.1);
+
+        --gradientMainNb: 0%;
+        --gradientSecondNb: 60%;
+        --ellipseMain: 40%;
+        --ellipseSecond: 50%;
+    }
+}
+
+@keyframes toPresence { 
+    to {
+        --accentLG: rgba(0, 0, 0, 0);
+        --mainLG: rgba(255, 110, 151, 0.2);
+        --secondaryLG: rgba(255, 255, 255, 0.2);
+
+        --mainCG: rgb(255 143 61);
+        --secondaryCG: rgb(228 115 33);
+
+        --mainRG: rgb(0 0 0 / 20%);
+        --secondaryRG: rgb(255 255 255 / 20%);
+        --borderColor: rgba(255, 177, 120, 1);
+
+        --gradientSecondNb: 26%;
+        --ellipseMain: 90%;
+        --ellipseSecond: 100%;
+    }
+}
+
 .off {
     transition: all 0.2s ease-in-out;
+    /* animation: toJoining 2500ms ease-in-out; */
 }
 
 @keyframes opacityTest {
@@ -96,7 +135,6 @@ a {
     to { 
         opacity: 1;
     }
-
 }
 
 .podTest { 
@@ -115,6 +153,11 @@ a {
     transition: transform 0.2s ease-in-out;
 }
 
+button, input {
+    opacity: 0;
+    animation: 2000ms ease-in-out var(--delay, 0ms) both opacityTest;
+}
+
 input, .multipleChoiceInput, .selectedAnswer, .removeBttn {
     background-color: var(--main-font-bg);
     padding: 10px;
@@ -122,7 +165,6 @@ input, .multipleChoiceInput, .selectedAnswer, .removeBttn {
     color: #F9DAC3;
     text-align: center;
     outline: thin;
-    animation: opacityTest 2000ms normal ease-in-out;
 }
 
 .selectedAnswer {
@@ -284,9 +326,6 @@ input, .multipleChoiceInput, .selectedAnswer, .removeBttn {
     --mainRG: rgb(0 0 0 / 20%);
     --secondaryRG: rgb(255 255 255 / 20%);
     --borderColor: rgba(255, 177, 120, 1);
-    /* --gradientSecondNb: 60%;
-    --ellipseMain: 80%;
-    --ellipseSecond: 100%; */
 
     --gradientSecondNb: 26%;
     --ellipseMain: 90%;
@@ -603,6 +642,4 @@ p {
 .removeBttn {
     transition: opacity 0.3s ease-in-out;
 }
-.opacityBttn {
-    opacity: 0.5;
-}
+

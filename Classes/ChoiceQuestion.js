@@ -20,7 +20,7 @@ export default class ChoiceQuestion extends Question {
 
     ask(onAnswer) {
         setTimeout(() => {
-            new Pod ().changeState("talking"); 
+            new Pod ().changeState("presence"); 
             super.ask();
             this.onAnswer = onAnswer;
             if (this.hasMultiplesAnswers) {

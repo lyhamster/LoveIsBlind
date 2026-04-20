@@ -60,7 +60,6 @@ export default class Candidate {
             favAnswer : this.favAnswer,
             name: this.name,
         };
-        
         return summaryObj;
     }
 };

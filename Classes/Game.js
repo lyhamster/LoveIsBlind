@@ -61,7 +61,7 @@ export default class Game {
         this.message.displayMessage("Recherche d'un candidat ...");  
         document.querySelector(".dialogue").classList.add("podTranslate");
         setTimeout(() => {
-            this.pod.changeState("presence"); 
+            this.pod.changeState("talking"); 
             this.message.displayMessage(`${this.candidates[this.indexNb].name} entre dans le pod`);
             this.currentCandidatesArr = [...this.candidates];
             this.candidates.splice(this.indexNb, 1);

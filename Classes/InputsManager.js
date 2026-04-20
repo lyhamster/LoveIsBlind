@@ -11,9 +11,12 @@ export default class InputsManager {
 
     displayInput(instanceArray, parentElement) { 
         if (instanceArray.length > 1) {
-            instanceArray.forEach((instance) => {
-                this.wrapper.appendChild(instance.createElement());
+            instanceArray.forEach((instance, index) => {
+                const element = instance.createElement();
+                element.style.setProperty("--delay", `${index * 300}ms`);
+                this.wrapper.appendChild(element);
             });
+            
             this.main.appendChild(this.wrapper);    
         } else {
            parentElement.appendChild(instanceArray[0].createElement());

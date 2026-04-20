@@ -52,3 +52,4 @@ export default class Pod {
         this.currentState = value;
     }  
 };
+
