@@ -1,4 +1,4 @@
-## Love Is Blind — Pod Dating Game
+## Love Is Blind 
 
 A small dating game inspired by the TV show **Love Is Blind**, built with **vanilla JavaScript, HTML and CSS**.
 
@@ -45,3 +45,5 @@ Some questions have a single answer, while others allow multiple choices.
 ## Tech stack
 
 JavaScript (ES6+ classes) · HTML5 · CSS3
+# LoveIsBlind
+oop related project
