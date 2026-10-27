@@ -1,11 +1,12 @@
 export default class Button {
     #label;
     #callback;
-    #color;
-    constructor(label, callback, color) {
+    #hasColor;
+
+    constructor(label, callback, hasColor) {
         this.#label = label;
         this.#callback = callback;
-        this.#color = color;
+        this.#hasColor = hasColor;
     };
 
     createElement() {
@@ -13,8 +14,8 @@ export default class Button {
         bttn.classList.add(...["multipleChoiceInput","removeBttn"]);
         bttn.textContent = this.#label; 
 
-        if (this.#color) {
-            bttn.classList.add(this.#color);
+        if (this.#hasColor) {
+            bttn.classList.toggle("theme_alt");
         };
         
         bttn.addEventListener("click",(e) => {
