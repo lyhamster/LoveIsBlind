@@ -1,18 +1,18 @@
+import MessageManagers from "./MessageManagers.js";
+import Pod from "./Pod.js";
+
 export default class Question {
+    label;
+
     constructor (label) {
         this.label = label;
-        this.element = document.createElement("div");
-        this.main = document.querySelector("main");
-    }
-
-    createElement () {      
-        this.element.classList.add("dialogue");
-        this.element.textContent = this.label;
-        return this.element;
     }
 
     ask(onAnswer) {
-        this.main.appendChild(this.createElement());
+        setTimeout(() => {
+            new MessageManagers().displayMessage(this.label);    
+        }, 2000);    
+        new Pod().changeState("talking");
     }
-}
+};
 

@@ -1,0 +1,202 @@
+@keyframes joining {
+    30% {
+        --angle: 60deg;
+        --secondaryCG:rgba(202, 188, 188, 1);
+        --secondaryRG: rgba(255, 255, 255, 0.2);
+
+        --ellipseMain: 50%;
+        --ellipseSecond: 60%;
+    }
+
+    50% {
+        --angle: 60deg;
+        --secondaryCG:rgba(202, 188, 188, 1);
+        --secondaryRG: rgba(255, 255, 255, 0.26);
+    }
+
+    80% {
+        --angle: 0deg;
+
+        --accentLG:  rgba(0, 0, 0, 0);
+        --mainLG:  rgba(255, 110, 151, 0.25);
+        --secondaryLG: rgb(255, 255, 255, 0.8);
+
+        --mainCG:rgba(251, 251, 251, 1);
+        --secondaryCG:  rgba(152, 141, 141, 1);
+
+        --mainRG: rgba(0, 0, 0, 0.1); 
+        --secondaryRG: rgba(255, 255, 255, 0.1);
+
+        --ellipseMain: 40%;
+        --ellipseSecond: 50%;
+    }
+}
+
+@keyframes talking { 
+    40% {
+        border: 10px solid #FFD4B4;
+        --ellipseMain: 40%;
+        --ellipseSecond: 40%;
+    } 
+}
+
+@keyframes thinkingRight {
+    30% {
+        --angle: -60deg;
+        --mainLG: rgba(255, 110, 151, 0.295);
+
+        --mainRG: rgba(0, 0, 0, 0.349); 
+        --secondaryRG: rgba(255, 255, 255, 0.075); 
+        --mainCG: #FFB178;
+        --secondaryCG: #E47321;
+
+        --ellipseMain: 35%;
+        --ellipseSecond: 30%;
+        border: 2px solid #FFB178;
+    }
+
+    60%, 80% {
+        --angle: 0deg;
+
+        --accentLG: #00000000;
+        --mainLG: rgba(255, 110, 151, 0.20);
+        --secondaryLG: rgba(255, 255, 255, 0);
+    
+        --mainCG: #D0FF78;
+        --secondaryCG: #7CE421;
+
+        --mainRG: rgba(0, 0, 0, 0.185); 
+        --secondaryRG: rgba(255, 255, 255, 0.253); 
+
+        border: 2px solid #9CFF78;
+        --ellipseMain: 50%;
+        --ellipseSecond: 46%;
+        opacity: 0.7;
+    }
+
+    100% {
+        --accentLG: rgba(0, 0, 0, 0);
+        --mainLG: rgba(255, 110, 151, 0.20);
+        --secondaryLG: rgba(255, 255, 255, 0);
+    
+        --mainCG: #D0FF78;
+        --secondaryCG: #7CE421;
+
+        --mainRG: rgba(0, 0, 0, 0.185); 
+        --secondaryRG: rgba(255, 255, 255, 0.253); 
+
+        border: 2px solid #9CFF78;
+        --ellipseMain: 50%;
+        opacity: 1;
+    }
+}
+
+@keyframes thinkingWrong {
+    30% {
+        --angle: -60deg;
+        --mainLG: rgba(255, 110, 151, 0.295);
+
+        --mainRG: rgba(0, 0, 0, 0.349); 
+        --secondaryRG: rgba(255, 255, 255, 0.075); 
+        --mainCG: #FFB178;
+        --secondaryCG: #E47321;
+
+        --ellipseMain: 35%;
+        --ellipseSecond: 30%;
+        border: 2px solid #FFB178;
+    }
+
+    60%, 80% {
+        --angle: -0deg;
+
+        --accentLG: rgba(0, 0, 0, 0);
+        --mainLG: rgba(255, 110, 151, 0.20);
+        --secondaryLG: rgba(255, 255, 255, 0);
+    
+        --mainCG: #FF7878;
+        --secondaryCG: #E42721;
+
+        --mainRG: rgba(0, 0, 0, 0.185); 
+        --secondaryRG: rgba(255, 255, 255, 0.253); 
+
+        border: 2px solid #FF7878;
+        --ellipseMain: 50%;
+        --ellipseSecond: 46%;
+        opacity: 0.7;
+    }
+
+    100% {
+        --accentLG: #00000000;
+        --mainLG: rgba(255, 110, 151, 0.20);
+        --secondaryLG: rgba(255, 255, 255, 0);
+    
+        --mainCG: #FF7878;
+        --secondaryCG: #E42721;
+
+        --mainRG: rgba(0, 0, 0, 0.185); 
+        --secondaryRG: rgba(255, 255, 255, 0.253); 
+
+        border: 2px solid #FF7878;
+        --ellipseSecond: 40%;
+        --ellipseMain: 50%;
+        opacity: 1;
+    }
+}
+
+@keyframes matching {
+    0% {
+        border: none;
+    }
+
+    30% {
+        --mainCG: rgb(255, 186, 135);
+        --secondaryCG: rgb(255, 166, 23);
+        --ellipseMain: 40%;
+        --ellipseSecond: 30%;
+        border: none;
+    }
+
+    100% {
+        --accentLG: rgba(0, 0, 0, 0, 0.20);
+        --mainLG: rgba(255, 110, 151, 0.20);
+        --secondaryLG: rgba(255, 255, 255, 0.37);
+
+        --mainCG: rgba(255, 185, 135, 0.24);
+        --secondaryCG: rgba(255, 166, 23, 1);
+
+        --mainRG: rgba(0, 0, 0, 0.20); 
+        --secondaryRG: rgba(255, 194, 141, 0.20);
+
+        --ellipseMain: 60%;
+        --ellipseSecond: 40%;
+
+        border: none;
+
+        box-shadow: 
+            rgba(255, 106, 0, 0.40)  0px 1px 2px, 
+            rgba(255, 106, 0, 0.40)  -2px 0px 30px,
+            rgba(255, 106, 0, 0.40)  0px 0px 16px,
+            rgba(255, 106, 0, 0.40)  -11px -11px 16px, 
+            rgba(255, 106, 0, 0.40)  16px 11px 25px, 
+            rgba(255, 106, 0, 0.40)  0px 10px 20px;
+    }
+} 
+
+@keyframes opacityTest {
+    from { 
+        opacity: 0;
+    }
+
+    to { 
+        opacity: 1;
+    }
+}
+
+@keyframes animalCrossing {
+    0%, 30% {
+        opacity: 0;
+    }
+    35%, 100% {
+        opacity: 1;
+    }
+}

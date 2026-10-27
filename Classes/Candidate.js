@@ -1,7 +1,8 @@
+import { wait } from "../utils.js";
 import Answer from "./Answer.js";
-import ChoiceQuestion from "./ChoiceQuestion.js";
-import FreeTextQuestion from "./FreeTextQuestion.js";
-import Pod from "./Pod.js";
+import Button from "./Button.js";
+import InputsManager from "./InputsManager.js";
+import MessageManagers from "./MessageManagers.js";
 
 export default class Candidate {
     indexNb = 0;
@@ -10,6 +11,7 @@ export default class Candidate {
     positiveCount = 0; 
     favQuestion;
     favAnswer; 
+    quitPodScore = -20;
     static totalQuestionLabel = "Nombres de questions répondues";
     static positiveAnswersLabel = "Nombre de réponses vraies";
     static negativeAnswersLabel = "Nombre de réponses fausses";
@@ -20,43 +22,58 @@ export default class Candidate {
         this.questions = questions;
     }
 
-    display() {
-        const podElement = new Pod().createElement();
-        const nameElement = document.createElement("p");
-        nameElement.textContent = this.name;
-        nameElement.classList.add("dialogue");
-        podElement.insertAdjacentElement("afterend", nameElement);
+    getNameElement() {
+        return this.name;
     }
 
-    nextQuestion() {    
-        if (this.indexNb >= this.questions.length) {
-            this.dateSummary();
+    async nextQuestion(onFinish) {    
+        const main = document.querySelector("main");
+        
+        if (this.interestLevel === this.quitPodScore) {
+                const nameElement = document.querySelector(".matchingModalTitle");
+                await wait(2000);
+                new MessageManagers().displayMessage(`${this.name} a quitté le pod`);  
+                nameElement.remove();
+                const dateAgainBttn = new Button("Date à nouveau", () => {
+                    while (main.firstChild) {
+                        main.removeChild(main.lastChild);
+                    }
+                    onFinish(); 
+                })
+                setTimeout(() => {
+                    new InputsManager().displayInput([dateAgainBttn], main)
+                }, 2000);
             return;
         }
 
+        if (this.indexNb >= this.questions.length) {
+            onFinish();
+            return;
+        };   
         this.questions[this.indexNb].ask((answerPoints) => {
             setTimeout(() => {
                 if (answerPoints < 0) {
                     this.negativeCount++;
                 } else {
                     this.positiveCount++;
-                }
+                };
 
                 if (answerPoints >= Answer.favourite) {
                     this.favQuestion = this.questions[this.indexNb].label;
                     this.questions[this.indexNb].answers.forEach((answer) => {
                         if (answer.label && answer.level >= Answer.favourite) {
                             this.favAnswer = answer.label;
-                        }
+                        };
                     });
-                }
-
+                };
+                
                 this.interestLevel += (answerPoints);
                 this.indexNb++;
-                this.nextQuestion();
+
+                this.nextQuestion(onFinish); 
             }, 2000);
         });
-    };
+    }
 
     dateSummary() {
         const summaryObj = {
@@ -65,32 +82,10 @@ export default class Candidate {
             [Candidate.negativeAnswersLabel] : this.negativeCount,
             favQuestion : this.favQuestion,
             favAnswer : this.favAnswer,
-        }
+            name: this.name,
+            quitpod: this.quitPodScore,
+            interestLevel: this.interestLevel,
+        };
+        return summaryObj;
     }
 };
-
-const paul = new Candidate ("Paul Mescal", 28, [
-    new FreeTextQuestion("tu as combien d'enfants ?", (childNb) => {
-        const answerValue = childNb.target.value;
-        if (parseInt(answerValue) === 0) {
-            return 5;
-        } else {
-            return -5;
-        }
-    }, false),
-    new ChoiceQuestion("tu préfères marcher en ville ou à la montagne ?", [
-        new Answer ("ville", Answer.favourite),
-        new Answer ("montagne", Answer.negative),
-    ], false),
-    new ChoiceQuestion("est-ce tu aimes les films d'A24?", [
-        new Answer ("oui", Answer.positive),
-        new Answer ("non", Answer.negative),
-    ], false),
-    new ChoiceQuestion("parmis les films d'A24, lequel est-t-on pref ?", [
-        new Answer ("Past Lives", Answer.positive),
-        new Answer ("Pearl", Answer.positive),
-        new Answer ("AfterSun", Answer.positive),
-        new Answer ("Whiplash", Answer.ick),
-    ], true),
-]);
-

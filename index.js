@@ -1,11 +1,11 @@
-import "./Classes/Button.js"
-import "./Classes/Input.js"
-import "./Classes/Pod.js"
-import "./Classes/Answer.js"
-import "./Classes/Question.js"
-import "./Classes/ChoiceQuestion.js"
-import "./Classes/FreeTextQuestion.js"
-import "./Classes/Candidate.js"
-import "./Classes/MatchingModal.js"
-import "./Classes/MessageManagers.js"
-import "./Classes/InputsManager.js"
+import "./Classes/Game.js"
+
+const heartCursor = document.querySelector(".heartCursor");
+
+document.addEventListener("mousemove", (e) => {
+    let leftPosition = e.pageX;
+    let topPosition = e.pageY; 
+
+    heartCursor.style.left = leftPosition + "px";
+    heartCursor.style.top = topPosition + "px";
+})
