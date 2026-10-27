@@ -1,4 +1,8 @@
+import { wait } from "../utils.js";
 import Answer from "./Answer.js";
+import Button from "./Button.js";
+import InputsManager from "./InputsManager.js";
+import MessageManagers from "./MessageManagers.js";
 
 export default class Candidate {
     indexNb = 0;
@@ -7,6 +11,7 @@ export default class Candidate {
     positiveCount = 0; 
     favQuestion;
     favAnswer; 
+    quitPodScore = -20;
     static totalQuestionLabel = "Nombres de questions répondues";
     static positiveAnswersLabel = "Nombre de réponses vraies";
     static negativeAnswersLabel = "Nombre de réponses fausses";
@@ -21,12 +26,30 @@ export default class Candidate {
         return this.name;
     }
 
-    nextQuestion(onFinish) {    
+    async nextQuestion(onFinish) {    
+        const main = document.querySelector("main");
+        
+        if (this.interestLevel === this.quitPodScore) {
+                const nameElement = document.querySelector(".matchingModalTitle");
+                await wait(2000);
+                new MessageManagers().displayMessage(`${this.name} a quitté le pod`);  
+                nameElement.remove();
+                const dateAgainBttn = new Button("Date à nouveau", () => {
+                    while (main.firstChild) {
+                        main.removeChild(main.lastChild);
+                    }
+                    onFinish(); 
+                })
+                setTimeout(() => {
+                    new InputsManager().displayInput([dateAgainBttn], main)
+                }, 2000);
+            return;
+        }
+
         if (this.indexNb >= this.questions.length) {
             onFinish();
             return;
-        };
-        
+        };   
         this.questions[this.indexNb].ask((answerPoints) => {
             setTimeout(() => {
                 if (answerPoints < 0) {
@@ -43,10 +66,11 @@ export default class Candidate {
                         };
                     });
                 };
-
+                
                 this.interestLevel += (answerPoints);
                 this.indexNb++;
-                this.nextQuestion(onFinish);
+
+                this.nextQuestion(onFinish); 
             }, 2000);
         });
     }
@@ -59,6 +83,8 @@ export default class Candidate {
             favQuestion : this.favQuestion,
             favAnswer : this.favAnswer,
             name: this.name,
+            quitpod: this.quitPodScore,
+            interestLevel: this.interestLevel,
         };
         return summaryObj;
     }
