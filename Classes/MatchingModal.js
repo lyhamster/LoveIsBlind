@@ -12,7 +12,6 @@ export default class MatchingModal {
 
     createElement(onReset) {
         this.element.classList.add("matchingModalWrapper");
-
         this.textElement.classList.add("matchingModalTitle","matchingModalTitle_decoration");
         this.textElement.textContent = "C'est le match !";
         this.element.appendChild(this.textElement);
@@ -25,11 +24,11 @@ export default class MatchingModal {
 
         this.element.appendChild(this.createDateSummary());
         
-        const bttnElement = new Button("Recommencer",() => {  
+        const bttnElement = new Button("Recommencer", () => {  
             this.main.removeChild(this.element);
             onReset();
         }, "theme_alt");
-        new InputsManager().displayInput([bttnElement],this.element);
+        new InputsManager().displayInput([bttnElement], this.element);
 
         this.main.appendChild(this.element);
     }
@@ -44,13 +43,12 @@ export default class MatchingModal {
 
         const favAnswerElement = this.#appendElement("div",["favAnswer","dateRecapSpace"], null, dateRecapWrapperElement); 
         this.#appendElement("p", ["titleUnderline"], "Réponse coup de coeur", favAnswerElement);
-        this.#appendElement("p", [null],  this.candidateSummaryDate.favQuestion, favAnswerElement);
-        this.#appendElement("p", [null],  this.candidateSummaryDate.favAnswer, favAnswerElement);
+        this.#appendElement("p", [null], this.candidateSummaryDate.favQuestion, favAnswerElement);
+        this.#appendElement("p", [null], this.candidateSummaryDate.favAnswer, favAnswerElement);
         return dateRecapWrapperElement;
     }
 
     #appendElement(container, classListName, elementContent, parentElement) {
-
         const element = document.createElement(container);
         element.classList.add(...classListName);
         element.textContent = elementContent;

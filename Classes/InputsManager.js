@@ -16,7 +16,6 @@ export default class InputsManager {
                 element.style.setProperty("--delay", `${index * 300}ms`);
                 this.wrapper.appendChild(element);
             });
-            
             this.main.appendChild(this.wrapper);    
         } else {
            parentElement.appendChild(instanceArray[0].createElement());
