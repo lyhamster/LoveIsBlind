@@ -35,39 +35,31 @@ export default class Game {
         new InputsManager().displayInput([enterGameBttn],this.main);
     }
 
-    play(onRemove) {
+    async play(onRemove) {
         if (this.candidates.length === 0) {
             const nameElement = document.querySelector(".dialogue");
             nameElement.remove();
             return;
         };
         onRemove(); 
-        
+
         this.currentCandidatesArr = this.candidates;
-        
+
         const dialogueElement = document.querySelectorAll(".dialogue");
         dialogueElement.forEach((dialogue) => {
             dialogue.remove();
         });
-      
         this.indexNb = Math.floor(Math.random() * this.candidates.length);
-
-        document.querySelector(".pod").classList.add("podTest");
         
-
         this.pod.changeState("joining");
-
-        
-        this.message.displayMessage("Recherche d'un candidat ...");  
-        document.querySelector(".dialogue").classList.add("podTranslate");
+   
+        await this.message.displayMessage("Recherche d'un candidat");     
+        this.pod.changeState("presence");
+        await this.message.displayMessage(`${this.candidates[this.indexNb].name} entre dans le pod`);
+        this.currentCandidatesArr = [...this.candidates];
+        this.candidates.splice(this.indexNb, 1);
         setTimeout(() => {
-            this.pod.changeState("talking"); 
-            this.message.displayMessage(`${this.candidates[this.indexNb].name} entre dans le pod`);
-            this.currentCandidatesArr = [...this.candidates];
-            this.candidates.splice(this.indexNb, 1);
-            setTimeout(() => {
-                this.#discuss();
-            }, 2500);
+            this.#discuss();
         }, 2000);
     }
 
