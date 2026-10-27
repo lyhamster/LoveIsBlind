@@ -1,2 +1,2 @@
-# LoveIsBlind_POO
+# LoveIsBlind
 oop related project
