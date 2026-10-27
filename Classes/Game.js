@@ -6,6 +6,7 @@ import FreeTextQuestion from "./FreeTextQuestion.js";
 import InputsManager from "./InputsManager.js";
 import MatchingModal from "./MatchingModal.js";
 import MessageManagers from "./MessageManagers.js";
+import ParametersModal from "./ParametersModal.js";
 import Pod from "./Pod.js";
 
 export default class Game {
@@ -22,7 +23,6 @@ export default class Game {
     }
 
     initialize() {
-
         this.main.appendChild(this.pod.createElement()); 
         this.pod.changeState("off");
         const enterGameBttn = new Button("Entrer dans le pod", () => {
@@ -31,7 +31,7 @@ export default class Game {
                 enterGameBttn.classList.add("opacityBttn")
                 enterGameBttn.remove();
             });
-        },null);
+        }, null);
         new InputsManager().displayInput([enterGameBttn],this.main);
     }
 
@@ -64,15 +64,18 @@ export default class Game {
     }
 
     #discuss() {
-        document.querySelector(".matchingModalTitle").classList.add("podTranslate");
         this.pod.setTitle(this.currentCandidatesArr[this.indexNb].getNameElement());
-       
         this.currentCandidatesArr[this.indexNb].nextQuestion(() => {
             const dateSummaryObject = this.currentCandidatesArr[this.indexNb].dateSummary();
-            new MatchingModal(dateSummaryObject).createElement(() => {
+            if (dateSummaryObject.interestLevel === dateSummaryObject.quitpod) {
                 new Game(this.candidates).initialize();
                 this.pod.setTitle("");
-            });
+            } else {
+                new MatchingModal(dateSummaryObject).createElement(() => {
+                    new Game(this.candidates).initialize();
+                    this.pod.setTitle("");
+                });
+            }
         });
     }
 };
@@ -81,9 +84,9 @@ const Pierre = new Candidate ("Pierre", 28, [
     new FreeTextQuestion("tu as combien d'enfants ?", (childNb) => {
         const answerValue = childNb.target.value;
         if (parseInt(answerValue) === 0) {
-            return 5;
+            return 10;
         } else {
-            return -5;
+            return -10;
         }
     }, false),
     new ChoiceQuestion("tu préfères marcher en ville ou à la montagne ?", [
@@ -108,7 +111,7 @@ const Paul = new Candidate ("Paul", 28, [
         if (parseInt(answerValue) === 0) {
             return 5;
         } else {
-            return -5;
+            return -20;
         }
     }, false),
     new ChoiceQuestion("tu préfères marcher en ville ou à la montagne ?", [
@@ -133,7 +136,7 @@ const Jacque = new Candidate ("Jacque", 28, [
         if (parseInt(answerValue) === 0) {
             return 5;
         } else {
-            return -5;
+            return -20;
         }
     }, false),
     new ChoiceQuestion("tu préfères marcher en ville ou à la montagne ?", [
@@ -158,11 +161,11 @@ const John = new Candidate ("John", 28,[
         if (parseInt(answerValue) === 0) {
             return 5;
         } else {
-            return -5;
+            return -20;
         }
     }, false),
     new ChoiceQuestion("tu préfères marcher en ville ou à la montagne ?", [
-        new Answer("ville", Answer.favourite),
+        new Answer("ville", Answer.positive),
         new Answer("montagne", Answer.negative),
     ], false),
     new ChoiceQuestion("est-ce tu aimes les films d'A24?", [
@@ -177,6 +180,6 @@ const John = new Candidate ("John", 28,[
     ], true),
 ]);
 
-export const players = [John,Pierre,Paul,Jacque];
+export const players = [John, Pierre, Jacque, Paul];
 new Game(players).initialize();
-
+new ParametersModal().createElement();
