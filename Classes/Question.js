@@ -1,4 +1,5 @@
 import MessageManagers from "./MessageManagers.js";
+import Pod from "./Pod.js";
 
 export default class Question {
     label;
@@ -8,7 +9,10 @@ export default class Question {
     }
 
     ask(onAnswer) {
-        new MessageManagers().displayMessage(this.label);
+        setTimeout(() => {
+            new MessageManagers().displayMessage(this.label);    
+        }, 2000);    
+        new Pod().changeState("talking");
     }
 };
 
