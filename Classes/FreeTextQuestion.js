@@ -1,5 +1,6 @@
 import Input from "./Input.js";
 import InputsManager from "./InputsManager.js";
+import ParametersModal from "./ParametersModal.js";
 import Pod from "./Pod.js";
 import Question from "./Question.js";
 
@@ -26,10 +27,15 @@ export default class FreeTextQuestion extends Question {
             } else {
                 new Pod().changeState("thinkingWrong");  
             };
-            onAnswer(this.callback(e));
-        });
+            setTimeout(() => {
+                onAnswer(this.callback(e));
+            }, 2000)
+        }, new ParametersModal().getThemeAlt());
         super.ask();
-        new InputsManager().displayInput([inputAnswer],this.main);
+        setTimeout(() => {
+            new Pod().changeState("presence");
+            new InputsManager().displayInput([inputAnswer],this.main);
+        }, 3000)
     }
 };
 

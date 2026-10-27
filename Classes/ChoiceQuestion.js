@@ -41,8 +41,10 @@ export default class ChoiceQuestion extends Question {
                     new Pod().changeState("thinkingWrong");
                     this.#removeButton();
                 }
-                this.onAnswer(answer.level);
-            })
+                setTimeout(() => {
+                    this.onAnswer(answer.currentLevel);
+                }, 2000);
+            }, new ParametersModal().getThemeAlt())
             this.bttnArr.push(bttn);
         });
         new Pod().changeState("presence");
@@ -74,7 +76,9 @@ export default class ChoiceQuestion extends Question {
                 new Pod().changeState("thinkingWrong");
             };
             this.#removeButton();
-            this.onAnswer(this.scoreLevel);
+            setTimeout(() => {
+                this.onAnswer(this.scoreLevel);
+            }, 2000);
         },"theme_alt");
         const main = document.querySelector("main");
         new InputsManager().displayInput([validateBttn],main);
