@@ -1,6 +1,6 @@
 import Button from "./Button.js";
 import InputsManager from "./InputsManager.js";
-import MessageManagers from "./MessageManagers.js";
+import ParametersModal from "./ParametersModal.js";
 import Pod from "./Pod.js";
 import Question from "./Question.js";
 
@@ -18,23 +18,23 @@ export default class ChoiceQuestion extends Question {
         this.hasMultiplesAnswers = hasMultiplesAnswers;
     }
 
-    ask(onAnswer) {
+    ask(onAnswer) {   
+        super.ask();
         setTimeout(() => {
-            new Pod ().changeState("presence"); 
-            super.ask();
+            new Pod().changeState("presence");
             this.onAnswer = onAnswer;
             if (this.hasMultiplesAnswers) {
                 this.handleMultipleAnswers();
             } else {
                 this.handleAnswers(); 
-            };
-       }, 1000);
+            }; 
+        }, 3000);
     }
 
     handleAnswers() {
         this.answers.forEach((answer) => {
             const bttn = new Button(answer.label, () => {
-                if (answer.level >= 0) {
+                if (answer.currentLevel >= 0) {
                     new Pod().changeState("thinkingRight");
                     this.#removeButton();
                 } else {
@@ -47,10 +47,7 @@ export default class ChoiceQuestion extends Question {
             }, new ParametersModal().getThemeAlt())
             this.bttnArr.push(bttn);
         });
-        new Pod().changeState("presence");
-        setTimeout(() => {   
-            new InputsManager().displayInput(this.bttnArr);
-        }, 4000);
+        new InputsManager().displayInput(this.bttnArr);
     }
 
     handleMultipleAnswers() {
@@ -59,16 +56,16 @@ export default class ChoiceQuestion extends Question {
                 const target = e.target; 
                 if (target.classList.contains("selectedAnswer")) {
                     target.classList.remove("selectedAnswer");
-                    this.scoreLevel -= answer.level;
+                    this.scoreLevel -= answer.currentLevel;
                 } else {
                     target.classList.add("selectedAnswer");
-                    this.scoreLevel += answer.level;
+                    this.scoreLevel += answer.currentLevel;
                 };   
-            }); 
+            }, new ParametersModal().getThemeAlt()); 
             this.bttnArr.push(bttn);
         });
         new InputsManager().displayInput(this.bttnArr);
-
+        
         const validateBttn = new Button("Enter", () => {
             if (this.scoreLevel >= 0) {
                 new Pod().changeState("thinkingRight");
@@ -85,7 +82,7 @@ export default class ChoiceQuestion extends Question {
     }
 
     #removeButton() {
-        const bttnElements = document.querySelectorAll("button");
+        const bttnElements = document.querySelectorAll(".removeBttn");
             bttnElements.forEach((bttn) => {
                 bttn.remove();    
             });
