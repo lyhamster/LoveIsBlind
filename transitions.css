@@ -1,0 +1,96 @@
+@keyframes toJoining {
+    to {
+        --accentLG: rgba(0, 0, 0, 0);
+        --mainLG:  rgba(255, 110, 151, 0.25);
+        --secondaryLG: rgb(255, 255, 255, 0.8);
+
+        --mainCG:rgba(251, 251, 251, 1);
+        --secondaryCG:  rgba(152, 141, 141, 1);
+
+        --secondaryRG: rgba(255, 255, 255, 0.1);
+
+        --gradientMainNb: 0%;
+        --gradientSecondNb: 60%;
+        --ellipseMain: 40%;
+        --ellipseSecond: 50%;
+    }
+}
+
+@keyframes toPresence { 
+    to {
+        --accentLG: rgba(0, 0, 0, 0);
+        --mainLG: rgba(255, 110, 151, 0.2);
+        --secondaryLG: rgba(255, 255, 255, 0.2);
+
+        --mainCG: rgb(255 143 61);
+        --secondaryCG: rgb(228 115 33);
+
+        --mainRG: rgb(0 0 0 / 20%);
+        --secondaryRG: rgb(255 255 255 / 20%);
+        --borderColor: rgba(255, 177, 120, 1);
+
+        --gradientSecondNb: 26%;
+        --ellipseMain: 90%;
+        --ellipseSecond: 100%;
+    }
+}
+
+@keyframes toTalking {
+    to {
+        --accentLG: rgba(0, 0, 0, 0);
+        --mainLG: rgba(255, 110, 151, 0.2);
+        --secondaryLG: rgba(255, 255, 255, 0);
+
+        --mainCG: rgb(255 143 61);
+        --secondaryCG: rgb(228 115 33);
+
+        --mainRG: rgba(0, 0, 0, 0); 
+        --secondaryRG: rgba(255, 255, 255, 0.2);
+        --borderColor: #FFDA78;
+        --ellipseMain: 20%;
+        --ellipseSecond: 15%;
+        
+        --gradientMainNb: 13%;
+        --gradientSecondNb: 60%;
+        transition: all 1500ms linear;
+        animation: talking 1500ms infinite;
+    }
+}
+
+@keyframes toThinking {
+    to {
+        --accentLG: rgba(0, 0, 0, 0);
+        --mainLG: rgba(255, 110, 151, 0.20);
+        --secondaryLG: rgba(255, 255, 255, 0);
+        
+        --mainCG: #FFA868;
+        --secondaryCG: #FFBB89;
+
+        --mainRG: rgba(0, 0, 0, 0.20); 
+        --secondaryRG: rgb(255, 255, 255, 0.20); 
+        --borderColor: #FFB178;
+        --ellipseMain: 50%;
+        --ellipseSecond: 46%;
+        --gradientSecondNb: 60%;
+    }
+}
+
+@keyframes toMatching {
+    to {
+        --accentLG: #00000000;
+        --mainLG: rgba(255, 110, 151, 0.20);
+        --secondaryLG: rgba(255, 255, 255, 0.2);
+
+        --mainCG: rgb(255, 143, 61);
+        --secondaryCG: rgb(255, 166, 23);
+
+        --mainRG: rgba(0, 0, 0, 0.20); 
+        --secondaryRG: rgb(255, 255, 255, 0.20);
+        --borderColor:  rgb(255, 206, 71);
+
+        --gradientSecondNb: 60%;
+        --ellipseMain: 50%;
+        --ellipseSecond: 46%;
+    }
+}
+
