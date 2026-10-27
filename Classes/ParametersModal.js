@@ -54,8 +54,8 @@ export default class ParametersModal {
         modalParamWrapper.appendChild(parameterElement);
         this.element.appendChild(this.parameterLevelElement())
 
-        const test = document.querySelector(".paramSize");
-        test.addEventListener("click", () => {
+        const parameterElement = document.querySelector(".paramSize");
+        parameterElement.addEventListener("click", () => {
             const levelWrapper = document.querySelector(".levelWrapper");
     
             if (levelWrapper.style.display === "flex") {
