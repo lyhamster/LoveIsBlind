@@ -1,6 +1,12 @@
-import Candidate from "./Candidate.js";
-
 export default class Pod {
+    podTransition = {
+        joining: "2000ms ease-in-out toJoining",
+        presence: "2000ms ease-in-out toPresence", 
+        talking: "2000ms both ease-in-out toTalking",
+        thinkingRight: "2000ms ease-in-out toThinking",
+        thinkingWrong: "2000ms ease-in-out toThinking",
+    }
+
     constructor() {   
         if (!!Pod.instance) {
             return Pod.instance;
@@ -46,10 +52,16 @@ export default class Pod {
     changeState(value) {  
         const podElement = document.querySelectorAll(".pod");
         podElement.forEach((pod) => {
-            pod.classList.remove(this.currentState);
-            pod.classList.add(value);
-        });    
+            pod.style.animation = this.podTransition[value];
+        })
+        setTimeout(() => {
+            podElement.forEach((pod) => {
+                pod.classList.remove(this.currentState);
+                pod.style.animation = "";
+                pod.classList.add(value);
+            })
         this.currentState = value;
+        }, 2000);
     }  
 };
 
