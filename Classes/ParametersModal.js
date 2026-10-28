@@ -47,9 +47,9 @@ export default class ParametersModal {
         violetHeart.classList.remove("multipleChoiceInput", "removeBttn");
         violetHeart.classList.add("violetHeart");
 
-        const parameterElement = document.createElement("a");
-        parameterElement.textContent = "Paramètre"
-        parameterElement.classList.add("paramSize");
+        const parameterLinkElement = document.createElement("a");
+        parameterLinkElement.textContent = "Paramètre"
+        parameterLinkElement.classList.add("paramSize");
 
         modalParamWrapper.appendChild(parameterElement);
         this.element.appendChild(this.parameterLevelElement())
