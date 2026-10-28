@@ -51,7 +51,7 @@ export default class ParametersModal {
         parameterLinkElement.textContent = "Paramètre"
         parameterLinkElement.classList.add("paramSize");
 
-        modalParamWrapper.appendChild(parameterElement);
+        modalParamWrapper.appendChild(parameterLinkElement);
         this.element.appendChild(this.parameterLevelElement())
 
         const parameterElement = document.querySelector(".paramSize");
