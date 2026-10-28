@@ -1,5 +1,7 @@
 ## Love Is Blind 
 
+![pod_image](Pod.png)
+
 A small dating game inspired by the TV show **Love Is Blind**, built with **vanilla JavaScript, HTML and CSS**.
 
 The project was created primarily to practise **Object-Oriented Programming (OOP)** and JavaScript class architecture.
